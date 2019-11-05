@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    include:
+      - db
+      - aws
+      - secret
+
+  http:
+    encoding:
+      enabled: true
+      charset: UTF-8
+      force: true
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+logging:
+  level:
+    root: info

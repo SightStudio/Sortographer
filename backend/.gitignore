@@ -1,0 +1,19 @@
+### Basic config ###
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+
+### Security Credentials ###
+src/main/resources/application-db.yml
+src/main/resources/application-aws.yml
+src/main/resources/application-secret.yml
