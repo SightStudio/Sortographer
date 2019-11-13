@@ -7,7 +7,7 @@
       <div class="row">
         <q-card square class="shadow-24" style="width:300px;height:485px;">
           <q-card-section class="bg-deep-purple-7">
-            <h4 class="text-h5 text-white q-my-md">Registration</h4>
+            <h4 class="text-h5 text-white q-my-md">회원 가입</h4>
             <div class="absolute-bottom-right q-pr-md" style="transform: translateY(50%);">
               <q-btn fab icon="close" color="purple-4" />
             </div>

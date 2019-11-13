@@ -7,6 +7,11 @@ const routes = [
   {
     path: '/user/signin',
     component: () => import('pages/user/signin')
+  },
+
+  {
+    path: '/user/signup',
+    component: () => import('pages/user/signup')
   }
 ]
 export default routes

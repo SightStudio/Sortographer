@@ -35,8 +35,8 @@ public class AccountServiceImpl implements AccountServiceIF {
 
         accountRepo.save(account);
 
-         response = new ResponseDTO("회원가입에 성공하였습니다.", HttpStatus.OK, true);
-         response.addData("token", jwtTokenProvider.createToken(account.getEmail()));
+         response = new ResponseDTO("회원가입에 성공하였습니다.", HttpStatus.OK, false);
+         //response.addData("token", jwtTokenProvider.createToken(account.getEmail()));
          return response;
     }
 

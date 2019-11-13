@@ -28,7 +28,8 @@ public class AccountDetails implements UserDetailsService {
                 .authorities("USER")
                 .accountExpired(false)
                 .accountLocked(false)
-                .credentialsExpired(false).disabled(false)
+                .credentialsExpired(false)
+                .disabled(false)
                 .build();
     }
 }
