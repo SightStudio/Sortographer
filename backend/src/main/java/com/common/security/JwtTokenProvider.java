@@ -21,7 +21,7 @@ public class JwtTokenProvider {
     private final AccountDetails   accountDetails;
 
     public JwtTokenProvider(@Value("${security.jwt.token.secret-key}") String secretKey,
-                            @Value("${security.jwt.token.expire-length}") long expire,
+                            @Value("${security.jwt.token.expire-length}")   long expire,
                             AccountDetails accountDetails) {
 
         this.secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());

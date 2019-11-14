@@ -26,9 +26,9 @@ public class ResponseDTO {
     }
 
     public ResponseDTO(String message, HttpStatus httpStatus, boolean hasData) {
-        this.message = message;
+        this.message    = message;
         this.httpStatus = httpStatus;
-        this.data =  hasData ? new HashMap<>() : null;
+        this.data       =  hasData ? new HashMap<>() : null;
     }
 
     public void addData(String name, Object data) {
