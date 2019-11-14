@@ -20,10 +20,4 @@ public class AccountController {
         ResponseDTO repl = accountService.signup(signupForm);
         return new ResponseEntity<>(repl, repl.getHttpStatus());
     }
-
-//    @PostMapping("/signin")
-////    public ResponseEntity<ResponseDTO> signin(@RequestParam String email, @RequestParam String pw) {
-////        ResponseDTO repl = accountService.signin(new SigninForm(email, pw));
-////        return new ResponseEntity<>(repl, repl.getHttpStatus());
-////    }
 }

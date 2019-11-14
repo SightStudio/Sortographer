@@ -1,6 +1,6 @@
 <template>
-  <div
-    class="window-height window-width row justify-center items-center"
+  <q-page
+    class="row justify-center items-center"
     style="background: linear-gradient(#8274C5, #5A4A9F);"
   >
     <div class="column q-pa-lg">
@@ -33,6 +33,8 @@
           </q-card-actions>
 
           <q-card-section class="text-center q-pa-sm">
+            <q-btn flat class="text-grey-6" label="회원가입 하기" to="/user/signup"></q-btn>
+
             <q-btn flat class="text-grey-6" label="비밀번호를 잃어버리렸나요?">
               <q-popup-proxy>
                 <q-banner>
@@ -47,7 +49,7 @@
         </q-card>
       </div>
     </div>
-  </div>
+  </q-page>
 </template>
 
 <script>

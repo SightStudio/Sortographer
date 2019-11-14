@@ -16,7 +16,13 @@
       </q-header>
 
       <q-page-container style="margin-top: 50px;">
-        <router-view/>
+        <transition
+          appear
+          enter-active-class="animated fadeIn"
+          leave-active-class="animated fadeOut"
+        >
+          <router-view/>
+        </transition>
       </q-page-container>
 
       <!-- 2단 Gnb -->

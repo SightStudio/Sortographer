@@ -35,7 +35,9 @@ module.exports = function (ctx) {
       directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Dialog'
+      ]
     },
 
     // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie
@@ -51,7 +53,6 @@ module.exports = function (ctx) {
       // preloadChunks: false,
       // extractCSS: false,
 
-      // https://quasar.dev/quasar-cli/cli-documentation/handling-webpack
       extendWebpack (cfg) {
         cfg.module.rules.push({
           enforce: 'pre',
@@ -65,16 +66,29 @@ module.exports = function (ctx) {
       }
     },
 
-    // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
     devServer: {
       // https: true,
       port: 8079,
-      open: true // opens browser window automatically
+      open: false, // opens browser window automatically
+      proxy : {
+        '/api': {
+          target: 'http://localhost:8080/api',
+          ws: true,
+          changeOrigin: true,
+          pathRewrite: {
+            '^/api': ''
+          }
+        },
+      }
     },
 
     // animations: 'all', // --- includes all animations
     // https://quasar.dev/options/animations
-    animations: [],
+    animations: [
+      'jello',
+      'fadeIn',
+      'fadeOut'
+    ],
 
     // https://quasar.dev/quasar-cli/developing-ssr/configuring-ssr
     ssr: {
@@ -86,13 +100,13 @@ module.exports = function (ctx) {
       // workboxPluginMode: 'InjectManifest',
       // workboxOptions: {}, // only for NON InjectManifest
       manifest: {
-        // name: 'Quasar App',
-        // short_name: 'Quasar App',
-        // description: 'A Quasar Framework app',
-        display: 'standalone',
-        orientation: 'portrait',
+        name        : 'Sortographer',
+        short_name  : 'Sortographer',
+        description : 'Image classification gallery, powered by Amazon Rekognition',
+        display     : 'standalone',
+        orientation : 'portrait',
+        theme_color : '#027be3',
         background_color: '#ffffff',
-        theme_color: '#027be3',
         icons: [
           {
             'src': 'statics/icons/icon-128x128.png',

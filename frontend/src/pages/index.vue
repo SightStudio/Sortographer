@@ -6,11 +6,11 @@
         <q-card class="gallery-img col-md-2 q-ma-xs" v-for="i in 30" :key="i">
           <img src="https://cdn.quasar.dev/img/mountains.jpg">
 
-          <q-card-section class="q-pa-sm">
+          <q-card-section class="q-pa-xs">
             <div class="text-h6">Card {{i}}</div>
 
-            <q-btn flat round icon="favorite" color="red"    />
-            <q-btn flat round icon="bookmark" color="teal"   />
+            <q-btn flat round icon="favorite" color="red"  size="sm" />
+            <q-btn flat round icon="bookmark" color="teal" size="sm" />
           </q-card-section>
 
         </q-card>
@@ -23,7 +23,6 @@
 export default {
   data () {
     return {
-      lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     }
   }
 }

@@ -29,8 +29,8 @@ public class AccountServiceImpl implements AccountServiceIF {
         ResponseDTO response;
         Account account = Account.builder()
                              .email(form.getEmail())
-                             .name(form.getName())
-                             .pw(passwordEncoder.encode(form.getPw()))
+                             .name(form.getUsername())
+                             .pw(passwordEncoder.encode(form.getPassword()))
                              .build();
 
         accountRepo.save(account);
@@ -38,19 +38,5 @@ public class AccountServiceImpl implements AccountServiceIF {
          response = new ResponseDTO("회원가입에 성공하였습니다.", HttpStatus.OK, false);
          //response.addData("token", jwtTokenProvider.createToken(account.getEmail()));
          return response;
-    }
-
-    @Override
-    public ResponseDTO signin(SigninForm form) {
-
-        try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(form.getEmail(), form.getPw()));
-            ResponseDTO responseDTO = new ResponseDTO("로그인 성공", HttpStatus.OK, true);
-            responseDTO.addData("token", jwtTokenProvider.createToken(form.getEmail()));
-            return responseDTO;
-
-        } catch (AuthenticationException e) {
-          return new ResponseDTO("Invalid username/password supplied", HttpStatus.UNPROCESSABLE_ENTITY);
-        }
     }
 }
