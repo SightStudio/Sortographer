@@ -20,14 +20,14 @@ public class Account {
 
     private String email;
     private String name;
-    private String pw;
+    private String password;
     private LocalDateTime regTime;
 
     @Builder
-    public Account(String email, String name, String pw) {
-        this.email   = email;
-        this.name    = name;
-        this.pw      = pw;
-        this.regTime = LocalDateTime.now();
+    public Account(String email, String name, String password) {
+        this.email    = email;
+        this.name     = name;
+        this.password = password;
+        this.regTime  = LocalDateTime.now();
     }
 }

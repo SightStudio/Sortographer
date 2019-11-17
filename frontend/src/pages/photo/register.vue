@@ -31,6 +31,6 @@ export default {
 <style scoped>
   .current-page {
     width: 100%;
-    margin: 50px auto 0;
+    margin: 0 auto;
   }
 </style>

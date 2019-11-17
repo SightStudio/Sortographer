@@ -1,7 +1,7 @@
-import axios from 'axios'
+import axios        from 'axios'
 import { API_PATH } from '../../util/constant'
 
-const PATH = API_PATH
+const PATH = API_PATH;
 const service = {
 
   /**
@@ -23,11 +23,9 @@ const service = {
    * @author Dong-Min Seol
    * @since  2019.11.14
    */
-  signIn: (data) => {
-    return axios.post(`${PATH}/signin`, data)
-      .then(res => {
-        return res.status === 200;
-      })
+  signIn: (formData) => {
+    return axios.post(`${PATH}/signin`, formData)
+      .then(res => { return res; })
   }
 };
 

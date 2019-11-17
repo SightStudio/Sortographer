@@ -73,7 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginProcessingUrl("/api/signin").permitAll()
                 .usernameParameter("email")
-                .passwordParameter("pw")
+                .passwordParameter("password")
                 .successHandler(authSuccessHandler)
                 .failureHandler(authFailerHandler)
             .and()

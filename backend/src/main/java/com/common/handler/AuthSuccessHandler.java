@@ -4,7 +4,6 @@ import com.app.dto.ResponseDTO;
 import com.common.security.JwtTokenProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,6 +30,8 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
         // email jwt로 리턴
         repl.addData("jwt", jwtTokenProvider.createToken(userDetails.getUsername()));
 
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("multipart/form-data;charset=utf-8");
         response.getWriter().write(new ObjectMapper().writeValueAsString(repl));
         response.setStatus(HttpServletResponse.SC_OK);
     }

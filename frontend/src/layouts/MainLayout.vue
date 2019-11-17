@@ -3,34 +3,34 @@
       <q-header reveal>
         <q-toolbar class="row">
             <q-toolbar-title class="col-md-2">
-              <router-link to="/">The APP</router-link>
+              <q-btn flat to="/">Sortographer</q-btn>
             </q-toolbar-title>
 
             <div class="q-pa-xs col-md-6"></div>
 
             <div class="q-gutter-xs col-sm-4 text-right">
-              <q-btn unelevated color="white" text-color="primary" label="Sign in" to="/user/signin"/>
-              <q-btn unelevated color="white" text-color="primary" label="Sign up" to="/user/signup"/>
+              <q-btn unelevated color="white" text-color="primary" label="Sign in" to="/signin"/>
+              <q-btn unelevated color="white" text-color="primary" label="Sign up" to="/signup"/>
             </div>
         </q-toolbar>
       </q-header>
 
-      <q-page-container style="margin-top: 50px;">
+      <q-page-container>
         <transition
           appear
           enter-active-class="animated fadeIn"
           leave-active-class="animated fadeOut"
         >
-          <router-view/>
+          <router-view></router-view>
         </transition>
       </q-page-container>
 
       <!-- 2단 Gnb -->
-      <q-page-sticky position="top" expand class="bg-accent text-white q-mb-xs">
+      <q-page-sticky id="sub-gnb" position="top" expand class="text-white q-mb-xs">
         <q-toolbar class="row">
           <q-toolbar-title class="col-md-4"></q-toolbar-title>
 
-          <q-input class="col-md-4" outlined dense v-model="search" >
+          <q-input class="col-md-4" outlined dense v-model="search"  value="">
             <template v-slot:append>
               <q-btn flat icon="search"/>
             </template>
@@ -62,3 +62,8 @@ export default {
   }
 }
 </script>
+<style>
+  #sub-gnb {
+    background-color: rgb(60, 53, 53);
+  }
+</style>
