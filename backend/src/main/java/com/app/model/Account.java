@@ -1,13 +1,8 @@
 package com.app.model;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -18,16 +13,17 @@ public class Account {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(unique = true)
     private String email;
     private String name;
-    private String pw;
+    private String password;
     private LocalDateTime regTime;
 
     @Builder
-    public Account(String email, String name, String pw) {
-        this.email   = email;
-        this.name    = name;
-        this.pw      = pw;
-        this.regTime = LocalDateTime.now();
+    public Account(String email, String name, String password) {
+        this.email    = email;
+        this.name     = name;
+        this.password = password;
+        this.regTime  = LocalDateTime.now();
     }
 }

@@ -30,7 +30,7 @@ module.exports = function (ctx) {
       all: 'auto',
 
       components: [
-        'QIntersection'
+        'QIntersection',
       ],
       directives: [],
 

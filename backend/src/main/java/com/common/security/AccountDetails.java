@@ -24,7 +24,7 @@ public class AccountDetails implements UserDetailsService {
             throw new UsernameNotFoundException("User Eamil : '" + username + "' not found");
 
         return User.withUsername(account.getEmail())
-                .password(account.getPw())
+                .password(account.getPassword())
                 .authorities("USER")
                 .accountExpired(false)
                 .accountLocked(false)

@@ -29,15 +29,8 @@ export default {
 </script>
 
 <style scoped>
-  /*.gallery-img {*/
-  /*   margin: 0 auto;*/
-  /* }*/
   .current-page {
     width: 100%;
-    margin: 0 auto;
-  }
-
-  .img-container {
-    width: 80%;
+    margin: 50px auto 0;
   }
 </style>

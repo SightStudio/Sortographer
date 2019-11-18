@@ -67,7 +67,7 @@ export default {
       const result = userApi.signUp(this.form);
       if (result) {
         this.$q.dialog({
-          title: '회원 가입 완료!',
+          title  : '회원 가입 완료!',
           message: '메인 페이지로 이동합니다'
         }).onOk(() => {
           this.$router.push({ path: '/' })
