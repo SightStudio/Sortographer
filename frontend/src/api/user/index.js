@@ -1,5 +1,7 @@
 import axios        from 'axios'
+import store        from '../../store'
 import { API_PATH } from '../../util/constant'
+
 
 const PATH = API_PATH;
 const service = {
@@ -11,7 +13,8 @@ const service = {
    * @since  2019.11.14
    */
   signUp: (data) => {
-    return axios.post(`${PATH}/signup`, data)
+    return axios
+      .post(`${PATH}/signup`, data)
       .then(res => {
         return res.status === 200
       })
@@ -24,7 +27,22 @@ const service = {
    * @since  2019.11.14
    */
   signIn: (formData) => {
-    return axios.post(`${PATH}/signin`, formData)
+    return axios
+      .post(`${PATH}/signin`, formData)
+      .then(res => { return res; })
+  },
+
+  /**
+   * 유저 정보 가져오기
+   *
+   * @author Dong-Min Seol
+   * @since  2019.11.14
+   */
+  getProfile: () => {
+    return axios
+      .get(`${PATH}/me`, {
+        headers : { 'Authorization' : `Bearer ${store().state.user.jwt}` }
+      })
       .then(res => { return res; })
   }
 };

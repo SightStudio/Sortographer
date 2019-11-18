@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * 유저 라우터
  * @author Dong-Min Seol
@@ -5,9 +6,9 @@
  */
 const PATH = '/user';
 const routes = [
-  {
-    path     : `${PATH}/register`,
-    component: () => import('pages/photo/register')
-  }
+  // {
+  //   path     : `${PATH}/register`,
+  //   component: () => import('pages/photo/register')
+  // }
 ];
 export default routes

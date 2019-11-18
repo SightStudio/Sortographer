@@ -33,7 +33,7 @@
           </q-card-actions>
 
           <q-card-section class="text-center q-pa-sm">
-            <q-btn flat class="text-grey-6" label="회원가입 하기" to="/user/signup"></q-btn>
+            <q-btn flat class="text-grey-6" label="회원가입 하기" to="/signup"></q-btn>
 
             <q-btn flat class="text-grey-6" label="비밀번호를 잃어버리렸나요?">
               <q-popup-proxy>
@@ -69,7 +69,13 @@ export default {
         password: this.password
       };
 
-      this.$store.dispatch('user/signin', data);
+      this.$store
+        .dispatch('user/signin', data)
+        .then(res => {
+          if (res === 200) {
+            this.$router.push('/');
+          }
+        });
     }
   }
 }

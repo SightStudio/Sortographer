@@ -1,5 +1,6 @@
 export default {
   user : {
-    jwt : sessionStorage.userJwt ? sessionStorage.userJwt  : null
+    jwt     : sessionStorage.userJwt ? sessionStorage.userJwt  : null,
+    profile : null
   }
 }

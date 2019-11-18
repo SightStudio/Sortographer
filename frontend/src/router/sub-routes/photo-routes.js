@@ -1,3 +1,4 @@
+/* eslint-disable */
 import auth from '../../util/validation/auth';
 
 /**
@@ -7,10 +8,10 @@ import auth from '../../util/validation/auth';
  */
 const PATH = '/photo';
 const routes = [
-  {
-    path       : `${PATH}/register`,
-    beforeEnter: auth.isUserLoggedIn(),
-    component  : () => import('pages/photo/register')
-  }
+  // {
+  //   path       : `${PATH}/register`,
+  //   beforeEnter: auth.isUserLoggedIn(),
+  //   component  : () => import('pages/photo/register')
+  // }
 ];
 export default routes

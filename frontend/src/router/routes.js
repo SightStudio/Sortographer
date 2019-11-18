@@ -16,6 +16,16 @@ const routes = [
       ...userRoutes,
       ...photoRoutes
     ]
+  },
+  {
+    path: '/user',
+    component: () => import('layouts/MainLayout.vue'),
+    children: userRoutes
+  },
+  {
+    path: '/photo',
+    component: () => import('layouts/MainLayout.vue'),
+    children: photoRoutes
   }
 ];
 

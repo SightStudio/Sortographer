@@ -16,6 +16,8 @@ public class AuthFailerHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("multipart/form-data;charset=utf-8");
         PrintWriter writer = response.getWriter();
         writer.write(exception.getMessage());
         writer.flush();
