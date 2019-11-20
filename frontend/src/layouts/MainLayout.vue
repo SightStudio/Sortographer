@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     openRegisterModal () {
-      if (this.$store.state.user.jwt) {
+      if (this.$store.getters['user/getProfile']) {
         this.$refs.registerModal.open();
       } else {
         this.$q.dialog({ title: '로그인 필요' , message: '사진을 업로드 하려면 로그인을 해주세요' });
