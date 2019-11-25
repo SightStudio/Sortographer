@@ -56,7 +56,7 @@
   </q-layout>
 </template>
 <script>
-import photoRegtisterModal from '../components/modal/register';
+import photoRegtisterModal from '../components/modal/register-photo';
 import { mapState } from 'vuex';
 export default {
   components : {

@@ -23,13 +23,6 @@ public class AccountDetails implements UserDetailsService {
         if(account == null)
             throw new UsernameNotFoundException("User Eamil : '" + username + "' not found");
 
-        return User.withUsername(account.getEmail())
-                .password(account.getPassword())
-                .authorities("USER")
-                .accountExpired(false)
-                .accountLocked(false)
-                .credentialsExpired(false)
-                .disabled(false)
-                .build();
+        return new SecurityUser(account);
     }
 }

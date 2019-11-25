@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.0.1",
   "description": "A Quasar Framework app",
-  "productName": "Quasar App",
+  "productName": "Sortographer",
   "cordovaId": "org.cordova.quasar.app",
   "capacitorId": "",
   "author": "Dong Min Seol <50672087+SightStudio@users.noreply.github.com>",

@@ -1,11 +1,12 @@
 <template>
-  <q-dialog v-model="card" class="row q-pa-md">
+  <q-dialog v-model="card" class="row q-pa-md" ref="thisDialog">
 
     <q-card class="col-10">
 
       <q-uploader
         url="/api/img/temp"
         label="이미지 등록"
+        auto-upload
         field-name="file"
         style="margin: 0; padding: 0; width: 100%;"
         @uploaded="afterTempUpload"
@@ -35,13 +36,13 @@
 
       <q-card-section>
         <div class="text-subtitle1">이미지 분석 결과</div>
-        <div class="text-subtitle2 text-grey">{{ detectionLabel }}</div>
+        <div class="text-subtitle2 text-grey">{{ labelResult }}</div>
       </q-card-section>
 
       <q-separator/>
 
       <q-card-actions class="justify-end">
-        <q-btn color="primary" v-close-popup>등록하기</q-btn>
+        <q-btn color="primary" @click="register">등록하기</q-btn>
       </q-card-actions>
 
     </q-card>
@@ -56,27 +57,48 @@ export default {
       card: false,
       stars: 3,
       tempImg: [],
-      detectionLabel : ''
+      detectionLabel : [],
+      s3Path: null
+    }
+  },
+  computed: {
+    labelResult () {
+      return this.detectionLabel.join(', ')
     }
   },
   methods: {
     open  () { this.card = true;  },
     close () { this.card = false; },
+
     afterTempUpload (info) {
       const repl = info.xhr.responseText;
       const obj  = JSON.parse(repl);
-      obj.data.tempUrlList.forEach(s3Path => this.tempImg.push({
-        label : PhotoApi.getImgLabel(s3Path),
-        url   : s3Path.absolutePath
-      }));
+      obj.data.tempUrlList.forEach(s3Path => {
+        this.s3Path = s3Path;
+        this.tempImg.push({
+          label : PhotoApi.getImgLabel(s3Path),
+          url   : s3Path.absolutePath
+        })
+      });
 
       this.tempImg.forEach(imgs => {
         imgs.label.then(list => {
           list.forEach(label => {
-            this.detectionLabel += `${label.name}, `;
+            this.detectionLabel.push(label.name);
           })
         })
       });
+    },
+
+    register () {
+      const data = {
+        title : 'test',
+        s3Path: this.s3Path,
+        labelList: this.detectionLabel
+      };
+
+      PhotoApi.registerImg(data);
+      // this.$refs.thisDialog.hide();
     }
   }
 }

@@ -6,10 +6,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.DeleteObjectRequest;
-import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.app.dto.S3Path;
+import com.amazonaws.services.s3.model.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,6 +45,11 @@ public class S3Mo {
                             .build();
     }
 
+    /**
+     * AWS S3 파일 업로드 함수
+     * @author DongMin-Seol
+     * @since  2019.11.24
+     */
     public S3Path uploadFile(MultipartFile multipartFile, String dirPath) {
         String fileUrl     = "";
         String abolutePath = "";
@@ -67,9 +69,36 @@ public class S3Mo {
         return new S3Path( abolutePath, fileUrl, fileName);
     }
 
-    public String deleteFileFromS3Bucket(String fileUrl) {
-        String fileName = fileUrl.substring(fileUrl.lastIndexOf("/") + 1);
-        s3client.deleteObject(new DeleteObjectRequest(bucketName, fileName));
+    /**
+     * AWS S3 동일 버킷 내 이동 함수
+     * @author DongMin-Seol
+     * @since  2019.11.24
+     */
+    public S3Path moveFile(S3Path s3PathFrom, String s3PathTo) {
+        S3Path s3Path = new S3Path();
+
+        CopyObjectRequest copyObjRequest = new CopyObjectRequest(bucketName, s3PathFrom.getBucketPath(), bucketName, s3PathTo)
+                .withCannedAccessControlList(CannedAccessControlList.PublicRead);
+
+        s3client.copyObject(copyObjRequest);
+        String path = s3client.getUrl(bucketName, s3PathTo).getPath();
+
+        s3Path.setFileName(s3PathFrom.getFileName());
+        s3Path.setBucketPath(path);
+        s3Path.setAbsolutePath(endpointUrl+path);
+
+        this.deleteFileFromS3Bucket(s3PathFrom.getBucketPath());
+        return s3Path;
+    }
+
+
+    /**
+     * AWS S3 파일 삭제 함수
+     * @author DongMin-Seol
+     * @since  2019.11.24
+     */
+    public String deleteFileFromS3Bucket(String bucketPath) {
+        s3client.deleteObject(new DeleteObjectRequest(bucketName, bucketPath));
         return "Successfully deleted";
     }
 

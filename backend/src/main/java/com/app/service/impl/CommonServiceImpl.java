@@ -1,7 +1,7 @@
 package com.app.service.impl;
 
 import com.app.dto.ResponseDTO;
-import com.app.dto.S3Path;
+import com.common.util.aws.s3.S3Path;
 import com.app.service.CommonServiceIF;
 import com.common.util.aws.s3.S3Mo;
 import lombok.RequiredArgsConstructor;
