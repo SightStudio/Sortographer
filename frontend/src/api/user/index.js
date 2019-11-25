@@ -1,8 +1,7 @@
 import axios        from 'axios'
-import store        from '../../store'
-import { API_PATH } from '../../util/constant'
+import { API_PATH, AUTH_HEADER } from '../../util/constant'
 
-
+// const headerAuth = AUTH_HEADER;
 const PATH = API_PATH;
 const service = {
 
@@ -40,9 +39,7 @@ const service = {
    */
   getProfile: () => {
     return axios
-      .get(`${PATH}/me`, {
-        headers : { 'Authorization' : `Bearer ${store().state.user.jwt}` }
-      })
+      .get(`${PATH}/me`, AUTH_HEADER())
       .then(res => { return res; })
   }
 };

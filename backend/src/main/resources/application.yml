@@ -16,6 +16,9 @@ spring:
       ddl-auto: create
     show-sql: true
 
+  datasource:
+    data: classpath*:db/data.sql
+
 logging:
   level:
     root: info

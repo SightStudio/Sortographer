@@ -5,6 +5,7 @@ import com.app.dto.ResponseDTO;
 import com.app.dto.SignupForm;
 import com.app.repository.AccountRepository;
 import com.app.service.AccountServiceIF;
+import com.common.security.SecurityUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,10 +22,10 @@ public class AccountServiceImpl implements AccountServiceIF {
     @Override
     public ResponseDTO getAccountProfile(UserDetails userDetails) {
         ResponseDTO response;
-        Account account = accountRepo.findAccountByEmail(userDetails.getUsername());
+        SecurityUser account = (SecurityUser) userDetails;
 
         response = new ResponseDTO("회원정보 조회 완료", HttpStatus.OK, true);
-        response.addData("profile", account);
+        response.addData("profile", account.getAccount());
 
         return response;
     }

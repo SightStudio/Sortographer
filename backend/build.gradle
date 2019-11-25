@@ -19,11 +19,14 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'com.amazonaws:aws-java-sdk-bom:1.11.228'
+	implementation 'com.amazonaws:aws-java-sdk-s3control:1.11.632'
+	implementation 'com.amazonaws:aws-java-sdk-rekognition:1.11.632'
+
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
-	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.10.1'
 
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'mysql:mysql-connector-java'
