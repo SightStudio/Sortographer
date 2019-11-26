@@ -9,7 +9,7 @@ import com.app.dto.photo.PhotoForm;
 import com.app.model.Account;
 import com.app.model.Photo;
 import com.app.repository.PhotoLabelRepository;
-import com.app.repository.PhotoRepository;
+import com.app.repository.photo.PhotoRepository;
 import com.app.service.PhotoServiceIF;
 import com.common.security.SecurityUser;
 import com.common.util.aws.rekognition.RekognitionMo;
@@ -28,6 +28,11 @@ public class PhotoServiceImpl implements PhotoServiceIF {
     private final RekognitionMo        rekognitionMo;
     private final PhotoRepository      photoRepo;
     private final PhotoLabelRepository photoLabelRepo;
+
+    @Override
+    public ResponseDTO getPhtotoList(int page) {
+        return null;
+    }
 
     @Override
     public ResponseDTO getPhotoLabel(S3Path s3Path) {
