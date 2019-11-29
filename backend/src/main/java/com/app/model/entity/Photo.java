@@ -1,10 +1,11 @@
-package com.app.model;
+package com.app.model.entity;
 
 import com.common.util.aws.s3.S3Path;
 import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -31,6 +32,11 @@ public class Photo {
     @JoinColumn(name = "account_id", foreignKey = @ForeignKey(name = "Account_ID_FK"))
     private Account account;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name="photo_id")
+    private Set<PhotoLabel> labels;
+
+    public Photo() {}
 
     public Photo(Account account, String title) {
         this.title    = title;

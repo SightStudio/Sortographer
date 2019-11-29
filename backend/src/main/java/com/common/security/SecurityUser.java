@@ -1,6 +1,6 @@
 package com.common.security;
 
-import com.app.model.Account;
+import com.app.model.entity.Account;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;

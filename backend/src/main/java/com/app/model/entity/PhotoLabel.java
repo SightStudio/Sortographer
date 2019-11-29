@@ -1,4 +1,4 @@
-package com.app.model;
+package com.app.model.entity;
 
 import lombok.Getter;
 
@@ -20,6 +20,8 @@ public class PhotoLabel {
     @ManyToOne
     @JoinColumn(name = "photo_id", foreignKey = @ForeignKey(name = "PHOTO_ID_FK"), nullable = false)
     private Photo photo;
+
+    public PhotoLabel() {}
 
     public PhotoLabel (Photo photo, String label) {
         this.photo   = photo;
