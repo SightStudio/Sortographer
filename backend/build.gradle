@@ -25,6 +25,9 @@ repositories {
 }
 
 dependencies {
+	compile group: 'it.ozimov', name: 'embedded-redis', version: '0.7.2'
+	compile 'org.springframework.boot:spring-boot-starter-data-redis'
+
 	implementation 'com.amazonaws:aws-java-sdk-bom:1.11.228'
 	implementation 'com.amazonaws:aws-java-sdk-s3control:1.11.632'
 	implementation 'com.amazonaws:aws-java-sdk-rekognition:1.11.632'

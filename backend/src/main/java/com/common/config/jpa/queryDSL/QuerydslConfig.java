@@ -1,4 +1,4 @@
-package com.common.config.queryDSL;
+package com.common.config.jpa.queryDSL;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.context.annotation.Bean;

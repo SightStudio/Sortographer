@@ -2,13 +2,14 @@ package com.app.service.impl;
 
 import com.amazonaws.services.rekognition.model.Label;
 import com.app.dto.ResponseDTO;
-import com.app.model.PhotoLabel;
+import com.app.dto.photo.PhotoInfoDTO;
+import com.app.model.entity.PhotoLabel;
 import com.common.util.aws.s3.S3Mo;
 import com.common.util.aws.s3.S3Path;
 import com.app.dto.photo.PhotoForm;
-import com.app.model.Account;
-import com.app.model.Photo;
-import com.app.repository.PhotoLabelRepository;
+import com.app.model.entity.Account;
+import com.app.model.entity.Photo;
+import com.app.repository.photoLabel.PhotoLabelRepository;
 import com.app.repository.photo.PhotoRepository;
 import com.app.service.PhotoServiceIF;
 import com.common.security.SecurityUser;
@@ -30,8 +31,13 @@ public class PhotoServiceImpl implements PhotoServiceIF {
     private final PhotoLabelRepository photoLabelRepo;
 
     @Override
-    public ResponseDTO getPhtotoList(int page) {
-        return null;
+    public ResponseDTO getPhtotoList(int page, int limit) {
+        ResponseDTO repl;
+
+        List<PhotoInfoDTO> PhotoList = photoRepo.findWithPhotoLabel(page, limit);
+        repl = new ResponseDTO("이미지 조회 완료", HttpStatus.OK, true);
+        repl.addData("photoList", PhotoList);
+        return repl;
     }
 
     @Override
@@ -42,6 +48,16 @@ public class PhotoServiceImpl implements PhotoServiceIF {
         repl = new ResponseDTO("이미지 분석 완료", HttpStatus.OK, true);
         repl.addData("labelList", labelList);
 
+        return repl;
+    }
+
+    @Override
+    public ResponseDTO getDistinctPhotoLabelList() {
+        ResponseDTO repl;
+        List<String> distinctLabelList = photoLabelRepo.getDistinctLabelList();
+
+        repl = new ResponseDTO("이미지 분석 완료", HttpStatus.OK, true);
+        repl.addData("distinctLabelList", distinctLabelList);
         return repl;
     }
 
@@ -57,6 +73,8 @@ public class PhotoServiceImpl implements PhotoServiceIF {
         account = user.getAccount();
         photo   = new Photo(account, photoForm.getTitle());
 
+        // [1] 사진 이미지 저장
+        photoRepo.save(photo);
         String imgPathTo = String.format(
                 "photo/%d/%s", photo.getId(), photoForm.getS3Path().getFileName()
         );
@@ -64,7 +82,7 @@ public class PhotoServiceImpl implements PhotoServiceIF {
         s3Path = s3Mo.moveFile(photoForm.getS3Path(), imgPathTo);
         photo.setPath(s3Path);
 
-        // [1] 사진 이미지 저장
+        // [2] 사진 이미지 경로 저장(업데이트)
         photoRepo.save(photo);
 
         // [2] 사진 이미지 분석 결과 저장

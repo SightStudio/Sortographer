@@ -16,7 +16,7 @@ public class JpaConfig {
         adapter.setShowSql(true);
         adapter.setDatabase(Database.MYSQL);
 
-        adapter.setDatabasePlatform("com.common.config.queryDSL.dialect.CustomMysqlDialect");
+        adapter.setDatabasePlatform("com.common.config.jpa.queryDSL.dialect.CustomMysqlDialect");
         adapter.setGenerateDdl(false);
         return adapter;
     }

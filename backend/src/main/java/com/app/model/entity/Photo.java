@@ -1,9 +1,7 @@
-package com.app.model;
+package com.app.model.entity;
 
-import com.app.model.Account;
 import com.common.util.aws.s3.S3Path;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

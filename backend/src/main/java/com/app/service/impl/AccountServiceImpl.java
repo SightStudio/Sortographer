@@ -1,6 +1,6 @@
 package com.app.service.impl;
 
-import com.app.model.Account;
+import com.app.model.entity.Account;
 import com.app.dto.ResponseDTO;
 import com.app.dto.SignupForm;
 import com.app.repository.AccountRepository;

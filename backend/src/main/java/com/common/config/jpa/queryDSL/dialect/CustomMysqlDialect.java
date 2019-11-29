@@ -1,4 +1,4 @@
-package com.common.config.queryDSL.dialect;
+package com.common.config.jpa.queryDSL.dialect;
 
 import org.hibernate.dialect.MySQL5Dialect;
 import org.hibernate.dialect.function.SQLFunctionTemplate;

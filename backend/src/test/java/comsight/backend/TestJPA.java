@@ -1,10 +1,9 @@
 package comsight.backend;
 
 import com.BackendApplication;
+import com.app.dto.photo.PhotoInfoDTO;
 import com.app.repository.photo.PhotoRepository;
-import com.app.repository.photo.PhotoRepositorySupport;
-import com.app.service.PhotoServiceIF;
-import com.querydsl.core.Tuple;
+import com.app.repository.photoLabel.PhotoLabelRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,18 +20,20 @@ import java.util.List;
 public class TestJPA {
 
     @Autowired
-    PhotoRepository photoRepository;
+    PhotoRepository      photoRepository;
 
     @Autowired
-    PhotoRepositorySupport photoRepositorySupport;
-
-    @Autowired
-    PhotoServiceIF serviceIF;
+    PhotoLabelRepository photoLabelRepository;
 
     @Test
-    public void test() {
-        List<Tuple> pList = photoRepositorySupport.findWithPhotoLabel(0, 10);
+    public void test_1() {
+        List<PhotoInfoDTO> pList = photoRepository.findWithPhotoLabel(1, 10);
         System.out.println(pList);
     }
 
+    @Test
+    public void test_2() {
+        List<String> pList = photoLabelRepository.getDistinctLabelList();
+        System.out.println(pList);
+    }
 }
