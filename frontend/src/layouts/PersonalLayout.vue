@@ -35,7 +35,6 @@ export default {
   data () {
     return {
       leftDrawerOpen: false,
-      search: ''
     }
   },
   methods: {

@@ -29,55 +29,21 @@
         </transition>
       </q-page-container>
 
-      <!-- 2단 Gnb -->
-      <q-page-sticky id="sub-gnb" position="top" expand class="text-white q-mb-xs">
-        <q-toolbar class="row justify-end">
-          <q-input class="search col-md-4 q-mr-lg" outlined dense v-model="search" value="">
-            <template v-slot:append>
-              <q-btn flat icon="search"/>
-            </template>
-          </q-input>
-
-          <div class="q-gutter-md col-sm-4 text-right">
-            <q-btn @click="openRegisterModal" unelevated dense color="white" text-color="primary" label="New Post"/>
-          </div>
-        </q-toolbar>
-      </q-page-sticky>
-
       <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
         <q-btn fab icon="keyboard_arrow_up" color="accent" />
       </q-page-scroller>
-
-      <photo-register-modal
-        ref="registerModal"
-      >
-      </photo-register-modal>
-
   </q-layout>
 </template>
 <script>
-import photoRegtisterModal from '../components/modal/register-photo';
 import { mapState } from 'vuex';
 export default {
-  components : {
-    'photo-register-modal' : photoRegtisterModal
-  },
   computed: mapState(['status', 'profile']),
   data () {
     return {
-      loggedin : false,
-      search   : '',
-      registerModalBtn: false
+      loggedin : false
     }
   },
   methods: {
-    openRegisterModal () {
-      if (this.$store.getters['user/getProfile']) {
-        this.$refs.registerModal.open();
-      } else {
-        this.$q.dialog({ title: '로그인 필요' , message: '사진을 업로드 하려면 로그인을 해주세요' });
-      }
-    },// end openRegisterModal
     logout () {
       this.$store.dispatch('user/logout');
       this.$router.go();
@@ -86,12 +52,4 @@ export default {
 }
 </script>
 <style>
-  #sub-gnb {
-    background-color: rgb(60, 53, 53);
-    margin-bottom: 50px;
-  }
-
-  #sub-gnb .search {
-    background-color: #7c4dff;
-  }
 </style>

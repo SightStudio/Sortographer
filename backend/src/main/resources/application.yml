@@ -30,6 +30,13 @@ spring:
     serialization:
       FAIL_ON_EMPTY_BEANS: false
 
+  output:
+    ansi:
+      enabled: always
+  servlet:
+    multipart:
+      max-file-size: 50MB
+
 logging:
   level:
     root: info
