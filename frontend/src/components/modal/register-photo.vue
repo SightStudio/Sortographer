@@ -102,7 +102,7 @@ export default {
         .registerImg(data)
         .then(data => {
           this.$q.dialog({ title: '등록 성공' , message: `사진 등록이 완료되었습니다.` });
-          this.$el.dispatchEvent(new Event('photoRegisterComplete'));
+          this.$emit('after-register-success', {});
           this.close();
         }).catch(e => {
           this.$q.dialog({ title: '등록 실패' , message: e.message });

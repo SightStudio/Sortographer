@@ -6,7 +6,6 @@ import com.app.dto.photo.PhotoForm;
 import com.app.service.PhotoServiceIF;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +20,6 @@ public class PhotoController {
     @GetMapping("/list/{page}/{limit}")
     public ResponseEntity<ResponseDTO> getPhotoList(@PathVariable int page,
                                                     @PathVariable int limit) {
-
         ResponseDTO repl = photoService.getPhtotoList(page,limit);
         return new ResponseEntity<>(repl, repl.getHttpStatus());
     }

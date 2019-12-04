@@ -5,7 +5,7 @@
 
       <q-card-section class="row bg-primary text-white">
         <div class="col-11 no-wrap items-center">
-          <div class="text-h6 ellipsis">{{ this.photoData.title }}</div>
+          <div class="text-h6 ellipsis">{{ photoData.title }}</div>
         </div>
       </q-card-section>
 
@@ -14,7 +14,7 @@
       <q-card-section class="row">
 
         <div class="col-7">
-          <q-img :src="this.photoData.absolutePath" alt="" class="photo-view-img"/>
+          <q-img :src="photoData.absolutePath" alt="" class="photo-view-img"/>
         </div>
 
         <div class="q-pl-lg col-4">

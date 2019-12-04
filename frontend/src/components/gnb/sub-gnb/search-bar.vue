@@ -2,7 +2,7 @@
 
   <!-- 2단 Gnb -->
   <q-page-sticky id="sub-gnb" position="top" expand class="text-white q-mb-xs">
-    <q-toolbar class="row justify-end">
+    <q-toolbar class="row items-start justify-end">
       <q-select
         filled
         v-model="search"
@@ -30,6 +30,7 @@
 
     <photo-register-modal
       ref="registerModal"
+      v-on="$listeners"
     >
     </photo-register-modal>
   </q-page-sticky>

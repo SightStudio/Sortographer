@@ -5,8 +5,7 @@
         <img :src="p.absolutePath">
 
         <q-card-section class="q-pa-xs">
-          <div class="text-h5">{{p.title}}</div>
-          <div class="text-h6">{{p.photoLabel}}</div>
+          <div class="text-h6">{{p.title}}</div>
 
           <q-btn flat round icon="favorite" color="red"  size="sm" />
           <q-btn flat round icon="bookmark" color="teal" size="sm" />
@@ -15,13 +14,14 @@
     </div>
 
     <sub-gnb-search
-      :autoCompleteSubject="this.suggestList"
+      :autoCompleteSubject="suggestList"
+      @after-register-success="getPhotoList"
     >
     </sub-gnb-search>
 
     <photo-viewer
       ref="photoViewer"
-      :photoData="this.photoInfo"
+      :photoData="photoInfo"
     >
     </photo-viewer>
   </q-page>
@@ -33,13 +33,8 @@ import searchBar   from '../components/gnb/sub-gnb/search-bar';
 import photoViewer from '../components/modal/photo-viewer';
 export default {
   components: {
-    'sub-gnb-search' : searchBar,
-    'photo-viewer'   : photoViewer
-  },
-  mounted () {
-    this.$el.addEventListener('photoRegisterComplete', () => {
-      this.getPhotoList();
-    })
+    'sub-gnb-search': searchBar,
+    'photo-viewer'  : photoViewer
   },
   data () {
     return {
