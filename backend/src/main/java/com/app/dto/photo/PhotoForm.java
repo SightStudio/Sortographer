@@ -8,7 +8,8 @@ import java.util.List;
 
 @Getter @Setter
 public class PhotoForm {
-    private String title;
-    private S3Path s3Path;
+    private String  title;
+    private S3Path  s3Path;
+    private String  isPrivate;
     private List<String> labelList;
 }

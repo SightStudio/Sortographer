@@ -1,0 +1,9 @@
+version: '3'
+services:
+  application:
+    container_name: spring-boot-app
+    image: sight/sortographer
+    build:
+      context: ./backend
+    ports:
+      - '8080:8080'

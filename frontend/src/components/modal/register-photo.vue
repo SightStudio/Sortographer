@@ -13,30 +13,45 @@
       />
 
       <q-card-section>
-        <div>
-          <q-btn
-            fab
-            color="primary"
-            icon="add"
-            class="absolute"
-            style="top: 0; right: 20px; transform: translateY(-50%);"
-          />
+        <div class="row no-wrap items-center justify-center">
 
-          <div class="row no-wrap items-center">
-            <div class="col text-h6 ellipsis">제목</div>
-            <div class="col-auto text-grey q-pt-md">
-              <q-icon name="add" /> new photo
+          <div class="col-10 text-h6 ellipsis">
+
+            <q-input bottom-slots v-model="title" label="제목 입력" counter :dense="true">
+              <template v-slot:prepend>
+                <q-icon name="subtitles" />
+              </template>
+              <template v-slot:append>
+                <q-icon name="close" @click="title = ''" class="cursor-pointer" />
+              </template>
+            </q-input>
+
+            <div class="text-right">
+              <q-chip class="text-left" dense icon="bookmark">공개 여부</q-chip>
+              <q-btn-toggle
+                v-model="isPrivate"
+                toggle-color="primary"
+                :options="[
+                  {label: '비공개', value: 'true'},
+                  {label: '공개'  , value: 'false'},
+                ]"
+              />
             </div>
           </div>
 
-          <q-rating v-model="stars" :max="5" size="32px" />
         </div>
+      </q-card-section>
 
+      <q-card-section>
+        <div class="text-grey q-ml-lg items-end text-right">
+          <p class="row">드래그 하여 등록</p>
+          <p class="row">또는 우측 상단 + 클릭</p>
+        </div>
       </q-card-section>
 
       <q-card-section>
         <div class="text-subtitle1">이미지 분석 결과</div>
-        <div class="text-subtitle2 text-grey">{{ labelResult }}</div>
+        <div class="text-subtitle2 text-grey">{{ this.detectionLabel.join(', ') }}</div>
       </q-card-section>
 
       <q-separator/>
@@ -54,20 +69,19 @@ import PhotoApi from '../../api/photo';
 export default {
   data () {
     return {
-      card: false,
-      stars: 3,
+      card   : false,
       tempImg: [],
       detectionLabel : [],
+      title    : '',
+      isPrivate: 'true',
       s3Path: null
     }
   },
-  computed: {
-    labelResult () {
-      return this.detectionLabel.join(', ')
-    }
-  },
   methods: {
-    open  () { this.card = true;  },
+    open  () {
+      this.card = true;
+      this.detectionLabel.length = 0;
+    },
     close () { this.card = false; },
 
     afterTempUpload (info) {
@@ -83,6 +97,7 @@ export default {
 
       this.tempImg.forEach(imgs => {
         imgs.label.then(list => {
+          this.detectionLabel.length = 0;
           list.forEach(label => {
             this.detectionLabel.push(label.name);
           })
@@ -92,13 +107,21 @@ export default {
 
     register () {
       const data = {
-        title : 'test',
-        s3Path: this.s3Path,
+        title    : this.title,
+        s3Path   : this.s3Path,
+        isPrivate: this.isPrivate,
         labelList: this.detectionLabel
       };
 
-      PhotoApi.registerImg(data);
-      // this.$refs.thisDialog.hide();
+      PhotoApi
+        .registerImg(data)
+        .then(data => {
+          this.$q.dialog({ title: '등록 성공' , message: `사진 등록이 완료되었습니다.` });
+          this.$emit('after-register-success', {});
+          this.close();
+        }).catch(e => {
+          this.$q.dialog({ title: '등록 실패' , message: e.message });
+        });
     }
   }
 }
@@ -109,11 +132,19 @@ export default {
   .q-card {
     width: 45%;
   }
+
+  .q-uploader {
+    min-height: 300px;
+  }
 }
 
 @media (max-width: 600px) {
   .q-card {
     width: 95%;
+  }
+
+  .q-uploader {
+    min-height: 150px;
   }
 }
 </style>

@@ -1,22 +1,24 @@
 package com.app.controller;
 
-import com.app.dto.ResponseDTO;
-import com.app.service.CommonServiceIF;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
 @RestController
-@RequiredArgsConstructor
-@RequestMapping("/api")
 public class IndexController {
 
-    private final CommonServiceIF  commonService;
+    @GetMapping("/")
+    public @ResponseBody String index() {
+        return "이곳은API 서버입니다.";
+    }
 
-    @PostMapping("/img/temp")
-    public ResponseDTO handleFileUpload(@RequestParam("file") MultipartFile[] uploadingFiles) throws IOException {
-        return commonService.imgTempSave(uploadingFiles);
+    @GetMapping("/api")
+    public @ResponseBody String apiIndex() {
+        return "이곳은API 서버입니다.";
+    }
+
+    @GetMapping("/healthcheck")
+    public @ResponseBody String healthCheck() {
+        return "이곳은API 서버입니다.";
     }
 }

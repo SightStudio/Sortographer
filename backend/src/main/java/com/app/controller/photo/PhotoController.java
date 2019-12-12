@@ -6,7 +6,6 @@ import com.app.dto.photo.PhotoForm;
 import com.app.service.PhotoServiceIF;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -19,10 +18,19 @@ public class PhotoController {
     private final PhotoServiceIF photoService;
 
     @GetMapping("/list/{page}/{limit}")
-    public ResponseEntity<ResponseDTO> getPhotoList(@PathVariable int page,
-                                                    @PathVariable int limit) {
+    public ResponseEntity<ResponseDTO> getPhotoList(@PathVariable int page, @PathVariable int limit,
+                                                    @RequestParam(value="label", required = false, defaultValue = "") String label) {
 
-        ResponseDTO repl = photoService.getPhtotoList(page,limit);
+        ResponseDTO repl = photoService.getPhtotoList(page, limit, label);
+        return new ResponseEntity<>(repl, repl.getHttpStatus());
+    }
+
+    @GetMapping("/list/user/{page}/{limit}")
+    public ResponseEntity<ResponseDTO> getUserPhotoList(@PathVariable int page, @PathVariable int limit,
+                                                        @RequestParam(value="label", required = false, defaultValue = "") String label,
+                                                        Authentication auth) {
+        UserDetails userDetails = (UserDetails) auth.getPrincipal();
+        ResponseDTO repl = photoService.getUserPhtotoList(userDetails, page, limit, label);
         return new ResponseEntity<>(repl, repl.getHttpStatus());
     }
 

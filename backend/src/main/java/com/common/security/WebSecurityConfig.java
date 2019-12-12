@@ -18,12 +18,15 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled=true)
 @RequiredArgsConstructor
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
     private final AuthSuccessHandler       authSuccessHandler;
     private final AuthFailerHandler        authFailerHandler;
@@ -50,12 +53,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .requestMatchers(new AntPathRequestMatcher("/static/**"));
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         // [1] X-Frame-Options 비활성화
         http.headers().frameOptions().disable();
+        http.cors();
 
         // [2] CSRF 방지 비활성화
         http.csrf().disable();

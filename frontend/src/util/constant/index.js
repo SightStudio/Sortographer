@@ -5,3 +5,5 @@ export const AUTH_HEADER = () => {
   return { headers: { 'Authorization': `Bearer ${store().getters['user/getProfile']}` } }
 };
 
+
+

@@ -2,6 +2,7 @@ package com.app.service.impl;
 
 import com.amazonaws.services.rekognition.model.Label;
 import com.app.dto.ResponseDTO;
+import com.app.dto.paging.PageDTO;
 import com.app.dto.photo.PhotoInfoDTO;
 import com.app.model.entity.PhotoLabel;
 import com.common.util.aws.s3.S3Mo;
@@ -31,12 +32,37 @@ public class PhotoServiceImpl implements PhotoServiceIF {
     private final PhotoLabelRepository photoLabelRepo;
 
     @Override
-    public ResponseDTO getPhtotoList(int page, int limit) {
+    public ResponseDTO getPhtotoList(int page, int limit, String label) {
         ResponseDTO repl;
 
-        List<PhotoInfoDTO> PhotoList = photoRepo.findWithPhotoLabel(page, limit);
+        List<PhotoInfoDTO> photoList = label.isBlank() ? photoRepo.findWithPhotoLabel(page, limit) :
+                                                         photoRepo.findWithPhotoLabel(page, limit, label);
+
+        int totalPageCnt = (int)Math.ceil(photoList.size() / (double)limit);
+        int curPage      = page;
+
         repl = new ResponseDTO("이미지 조회 완료", HttpStatus.OK, true);
-        repl.addData("photoList", PhotoList);
+        repl.addData("photoList", photoList);
+        repl.addData("pageInfo" , new PageDTO(totalPageCnt, curPage));
+        return repl;
+    }
+
+    @Override
+    public ResponseDTO getUserPhtotoList(UserDetails userDetails, int page, int limit, String label) {
+        ResponseDTO repl;
+        SecurityUser user = (SecurityUser) userDetails;
+        Account   account = user.getAccount();
+
+        List<PhotoInfoDTO> photoList = label.isBlank() ?
+                photoRepo.findWithUserPhotoLabel(page, limit, account.getEmail()) :
+                photoRepo.findWithPhotoLabel(page, limit, label);
+
+        int totalPageCnt = (int)Math.ceil(photoList.size() / (double)limit);
+        int curPage      = page;
+
+        repl = new ResponseDTO("이미지 조회 완료", HttpStatus.OK, true);
+        repl.addData("photoList", photoList);
+        repl.addData("pageInfo" , new PageDTO(totalPageCnt, curPage));
         return repl;
     }
 
@@ -71,7 +97,7 @@ public class PhotoServiceImpl implements PhotoServiceIF {
 
         user    = (SecurityUser) userDetails;
         account = user.getAccount();
-        photo   = new Photo(account, photoForm.getTitle());
+        photo   = new Photo(account, photoForm.getTitle(), photoForm.getIsPrivate());
 
         // [1] 사진 이미지 저장
         photoRepo.save(photo);
@@ -85,7 +111,7 @@ public class PhotoServiceImpl implements PhotoServiceIF {
         // [2] 사진 이미지 경로 저장(업데이트)
         photoRepo.save(photo);
 
-        // [2] 사진 이미지 분석 결과 저장
+        // [3] 사진 이미지 분석 결과 저장
         photoForm.getLabelList().forEach( label ->
             photoLabelRepo.save(new PhotoLabel(photo, label))
         );
