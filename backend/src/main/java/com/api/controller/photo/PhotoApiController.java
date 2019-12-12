@@ -1,9 +1,9 @@
-package com.app.controller.photo;
+package com.api.controller.photo;
 
 import com.app.dto.ResponseDTO;
-import com.common.util.aws.s3.S3Path;
 import com.app.dto.photo.PhotoForm;
 import com.app.service.PhotoServiceIF;
+import com.common.util.aws.s3.S3Path;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -11,9 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/photo")
+@RequestMapping("/api/external/photo")
 @RequiredArgsConstructor
-public class PhotoController {
+public class PhotoApiController {
 
     private final PhotoServiceIF photoService;
 
@@ -22,15 +22,6 @@ public class PhotoController {
                                                     @RequestParam(value="label", required = false, defaultValue = "") String label) {
 
         ResponseDTO repl = photoService.getPhtotoList(page, limit, label);
-        return new ResponseEntity<>(repl, repl.getHttpStatus());
-    }
-
-    @GetMapping("/list/user/{page}/{limit}")
-    public ResponseEntity<ResponseDTO> getUserPhotoList(@PathVariable int page, @PathVariable int limit,
-                                                        @RequestParam(value="label", required = false, defaultValue = "") String label,
-                                                        Authentication auth) {
-        UserDetails userDetails = (UserDetails) auth.getPrincipal();
-        ResponseDTO repl = photoService.getUserPhtotoList(userDetails, page, limit, label);
         return new ResponseEntity<>(repl, repl.getHttpStatus());
     }
 

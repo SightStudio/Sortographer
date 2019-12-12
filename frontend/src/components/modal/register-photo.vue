@@ -15,7 +15,8 @@
       <q-card-section>
         <div class="row no-wrap items-center justify-center">
 
-          <div class="col-8 text-h6 ellipsis">
+          <div class="col-10 text-h6 ellipsis">
+
             <q-input bottom-slots v-model="title" label="제목 입력" counter :dense="true">
               <template v-slot:prepend>
                 <q-icon name="subtitles" />
@@ -24,6 +25,18 @@
                 <q-icon name="close" @click="title = ''" class="cursor-pointer" />
               </template>
             </q-input>
+
+            <div class="text-right">
+              <q-chip class="text-left" dense icon="bookmark">공개 여부</q-chip>
+              <q-btn-toggle
+                v-model="isPrivate"
+                toggle-color="primary"
+                :options="[
+                  {label: '비공개', value: 'true'},
+                  {label: '공개'  , value: 'false'},
+                ]"
+              />
+            </div>
           </div>
 
         </div>
@@ -59,7 +72,8 @@ export default {
       card   : false,
       tempImg: [],
       detectionLabel : [],
-      title : '',
+      title    : '',
+      isPrivate: 'true',
       s3Path: null
     }
   },
@@ -93,8 +107,9 @@ export default {
 
     register () {
       const data = {
-        title : this.title,
-        s3Path: this.s3Path,
+        title    : this.title,
+        s3Path   : this.s3Path,
+        isPrivate: this.isPrivate,
         labelList: this.detectionLabel
       };
 

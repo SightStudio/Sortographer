@@ -1,5 +1,6 @@
 package com.common.security;
 
+import com.common.security.filter.JwtTokenFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

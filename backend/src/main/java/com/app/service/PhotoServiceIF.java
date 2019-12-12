@@ -8,9 +8,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 public interface PhotoServiceIF {
 
     // 사진 목록 조회
-    ResponseDTO getPhtotoList(int page, int limit);
+    ResponseDTO getPhtotoList(int page, int limit, String label);
 
-    // 사진 목록 조회
+    // 유저 사진 목록 조회
+    ResponseDTO getUserPhtotoList(UserDetails userDetails, int page, int limit, String label);
+
+    // 사진 라벨 조회
     ResponseDTO getPhotoLabel(S3Path s3Path);
 
     // 사진 분류 목록 전체 조회

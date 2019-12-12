@@ -1,5 +1,6 @@
 package com.app.model.entity;
 
+import com.common.config.jpa.BooleanToYNConverter;
 import com.common.util.aws.s3.S3Path;
 import lombok.Getter;
 
@@ -26,6 +27,9 @@ public class Photo {
     @Column(length = 100)
     private String fileName;
 
+    @Convert(converter = BooleanToYNConverter.class)
+    private boolean isPrivate;
+
     private LocalDateTime regTime;
 
     @ManyToOne
@@ -38,10 +42,11 @@ public class Photo {
 
     public Photo() {}
 
-    public Photo(Account account, String title) {
-        this.title    = title;
-        this.account  = account;
-        this.regTime  = LocalDateTime.now();
+    public Photo(Account account, String title, String isPrivate) {
+        this.title     = title;
+        this.account   = account;
+        this.regTime   = LocalDateTime.now();
+        this.isPrivate = "true".equals(isPrivate);
     }
 
     public void setPath(S3Path s3Path) {

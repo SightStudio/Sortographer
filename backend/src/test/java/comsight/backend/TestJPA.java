@@ -27,8 +27,12 @@ public class TestJPA {
 
     @Test
     public void test_1() {
-        List<PhotoInfoDTO> pList = photoRepository.findWithPhotoLabel(1, 10);
-        System.out.println(pList);
+        List<PhotoInfoDTO> pList1 = photoRepository.findWithPhotoLabel(1, 10);
+        System.out.println(pList1);
+
+
+        List<PhotoInfoDTO> pList2 = photoRepository.findWithPhotoLabel(1, 10, "Person");
+        System.out.println(pList2);
     }
 
     @Test

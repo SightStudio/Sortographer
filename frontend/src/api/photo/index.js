@@ -36,9 +36,13 @@ const service = {
    * @since  2019.11.29
    */
   getPhotoList: (data) => {
-    return axios
-      .get(`${PATH}/photo/list/${data.page}/${data.limit}`)
-      .then(res => { return res.data; })
+    return data.keyword
+      ? axios
+        .get(`${PATH}/photo/list/${data.page}/${data.limit}?label=${data.keyword}`)
+        .then(res => { return res.data; })
+      : axios
+        .get(`${PATH}/photo/list/${data.page}/${data.limit}`)
+        .then(res => { return res.data; })
   },
 
   /**

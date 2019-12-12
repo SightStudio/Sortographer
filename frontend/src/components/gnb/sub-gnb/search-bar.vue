@@ -21,6 +21,15 @@
             </q-item-section>
           </q-item>
         </template>
+
+        <template v-slot:append>
+          <q-icon name="close" @click="search = ''"/>
+          <q-icon
+            class="search"
+            name="search"
+            @click="searchEvent"
+          />
+        </template>
       </q-select>
 
       <div class="q-gutter-md col-sm-4 text-right">
@@ -73,7 +82,10 @@ export default {
         const needle = val.toLowerCase();
         this.options = this.autoCompleteSubject.filter(v => v.toLowerCase().indexOf(needle) > -1)
       })
-    } // end filterFn
+    }, // end filterFn
+    searchEvent () {
+      this.$emit('click-search', { search: this.search });
+    }
   }
 }
 </script>

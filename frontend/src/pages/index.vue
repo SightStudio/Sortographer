@@ -13,9 +13,19 @@
       </q-card>
     </div>
 
+<!--    <div class="row wrap items-start justify-center q-pa-md">-->
+<!--      <q-pagination-->
+<!--        v-model="pageInfo.pageNow"-->
+<!--        :max="pageInfo.totalPageCnt"-->
+<!--        @input="getNewPage"-->
+<!--      >-->
+<!--      </q-pagination>-->
+<!--    </div>-->
+
     <sub-gnb-search
       :autoCompleteSubject="suggestList"
       @after-register-success="getPhotoList"
+      @click-search="searchPhotoList"
     >
     </sub-gnb-search>
 
@@ -43,6 +53,10 @@ export default {
       photoInfo   : {
         absolutePath : '',
         photoLabel   : ''
+      },
+      pageInfo : {
+        pageNow     : 1,
+        totalPageCnt: 1
       }
     }
   },
@@ -54,13 +68,26 @@ export default {
     getPhotoList () {
       const data = {
         page  : 1,
-        limit : 20
+        limit : 100
       };
       PhotoApi
         .getPhotoList(data)
         .then(data => { this.photoList = data.data.photoList })
     },
-
+    searchPhotoList (param) {
+      const data = {
+        page    : 1,
+        limit   : 100,
+        keyword : param.search
+      };
+      PhotoApi
+        .getPhotoList(data)
+        .then(data => {
+          this.photoList = data.data.photoList;
+          this.pageInfo.pageNow      = data.data.pageNow;
+          this.pageInfo.totalPageCnt = data.data.totalPageCnt;
+        })
+    },
     getSuggestList () {
       PhotoApi
         .getDistinctPhotoLabel()
@@ -70,6 +97,20 @@ export default {
     openPhotoViewer (p) {
       this.photoInfo = p;
       this.$refs.photoViewer.open();
+    },
+    getNewPage (newVal) {
+      const data = {
+        page    : newVal,
+        limit   : 100,
+        keyword : ''
+      };
+      PhotoApi
+        .getPhotoList(data)
+        .then(data => {
+          this.photoList = data.data.photoList;
+          this.pageInfo.pageNow      = data.data.pageNow;
+          this.pageInfo.totalPageCnt = data.data.totalPageCnt;
+        })
     }
   }
 }

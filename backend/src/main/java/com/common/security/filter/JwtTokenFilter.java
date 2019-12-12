@@ -1,6 +1,7 @@
-package com.common.security;
+package com.common.security.filter;
 
 import com.common.exception.BizException;
+import com.common.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
