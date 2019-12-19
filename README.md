@@ -23,9 +23,10 @@
 AWS | ![단일 EC2](./document/readme_asset/middle.jpg) | ![ECS fargate](./document/readme_asset/final.png) 
 
 ##<span id="item2">2. 시연 화면</span>
-이미지 등록 | 이미지 검색 
-| --- | --- 
-| ![단일 EC2](./document/readme_asset/register.gif) | ![ECS fargate](./document/readme_asset/search.gif)
+
+이미지 등록 | 이미지 검색  
+| --- | ---  
+| ![단일 EC2](./document/readme_asset/register.gif) | ![ECS fargate](./document/readme_asset/search.gif)  
 
 ##<span id="item3">3. 도움이 되었던 예제들</span>
 + Spring Security + JWT 기반 인증 & 인가
