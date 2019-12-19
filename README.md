@@ -10,7 +10,7 @@
 [5. 사용 기술](#item5) 
 ****
 
-##<span id="item1">1. 주요 특징</span>
+## <span id="item1">1. 주요 특징</span>  
 
 + 로그인 :arrow_right: Spring Security + JWT
 + Persistance Layer  
@@ -22,12 +22,13 @@
 --- | --- | --- 
 AWS | ![단일 EC2](./document/readme_asset/middle.jpg) | ![ECS fargate](./document/readme_asset/final.png) 
 
-##<span id="item2">2. 시연 화면</span>
-이미지 등록 | 이미지 검색 
-| --- | --- 
-| ![단일 EC2](./document/readme_asset/register.gif) | ![ECS fargate](./document/readme_asset/search.gif)
+## <span id="item2">2. 시연 화면</span>  
 
-##<span id="item3">3. 도움이 되었던 예제들</span>
+이미지 등록 | 이미지 검색  
+| --- | ---  
+| ![단일 EC2](./document/readme_asset/register.gif) | ![ECS fargate](./document/readme_asset/search.gif)  
+
+## <span id="item3">3. 도움이 되었던 예제들</span>  
 + Spring Security + JWT 기반 인증 & 인가
   - https://github.com/murraco/spring-boot-jwt  
 
@@ -39,7 +40,7 @@ AWS | ![단일 EC2](./document/readme_asset/middle.jpg) | ![ECS fargate](./docum
   - youtube  : https://www.youtube.com/watch?v=blDvDDZ1ngg&t=1222s
   - 발표 자료 : https://www.slideshare.net/HyunMookChoi/fargate-ecs-with-vpc-1
   
-##<span id="item4">4.느낀점 + 아쉬웠던 부분 + 개선점이 필요한 부분</span>
+## <span id="item4">4.느낀점 + 아쉬웠던 부분 + 개선점이 필요한 부분</span>  
 1. CloudFront + S3 + ECS fargate 조합에서 SSL 인증서까지 적용 못함 (HTTPS, HTTP 2.0 X)
 2. 기술 스택을 무리하게 끌어올린 나머지 구현부분이 약간 미약함.
 3. 클라우드를 통해 개발 뿐 아니라 인프라에 관해 더 자세히 알 수 있었다. 
@@ -48,7 +49,7 @@ AWS | ![단일 EC2](./document/readme_asset/middle.jpg) | ![ECS fargate](./docum
 6. ㄴ> 시간 때문에 redis도 재대로 적용하지 못한점 ㅜㅜ
 
 **** 
-##<span id="item5">5. 사용 기술</span>
+## <span id="item5">5. 사용 기술</span>
 + FRONT END
   + Vue.js [2.6.10]
     + Quasar [1.4.3]
